@@ -1,0 +1,302 @@
+[
+	{
+		"id": "MDEwOlJlcG9zaXRvcnk0OTE1OTk4Mw==",
+		"name": "rescript-compiler",
+		"url": "https://github.com/rescript-lang/rescript-compiler",
+		"description": "The compiler for ReScript.",
+		"stargazerCount": 5382,
+		"updatedAt": "2021-08-10T15:54:05Z",
+		"nameWithOwner": "rescript-lang/rescript-compiler",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/29257325?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnk4NjIzNzI1Nw==",
+		"name": "rescript-react-native",
+		"url": "https://github.com/rescript-react-native/rescript-react-native",
+		"description": "ReScript bindings for React Native",
+		"stargazerCount": 825,
+		"updatedAt": "2021-08-09T14:01:47Z",
+		"nameWithOwner": "rescript-react-native/rescript-react-native",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/54703302?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxNTcxNDc1NzI=",
+		"name": "rescripts",
+		"url": "https://github.com/harrysolovay/rescripts",
+		"description": "💥 Use the latest react-scripts with custom configurations for Babel, ESLint, TSLint, Webpack,... ∞",
+		"stargazerCount": 1033,
+		"updatedAt": "2021-08-10T15:09:47Z",
+		"nameWithOwner": "harrysolovay/rescripts",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/4893548?u=283624711654b3050b903459de752ada3d695cb9&v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyODU1MDg4MjM=",
+		"name": "rescript-lang.org",
+		"url": "https://github.com/rescript-association/rescript-lang.org",
+		"description": "Official documentation website for the ReScript programming language",
+		"stargazerCount": 640,
+		"updatedAt": "2021-08-11T17:49:29Z",
+		"nameWithOwner": "rescript-association/rescript-lang.org",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/43032480?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxMTA3NTAyMDY=",
+		"name": "rescript-material-ui",
+		"url": "https://github.com/cca-io/rescript-material-ui",
+		"description": "ReScript bindings for Material-UI",
+		"stargazerCount": 204,
+		"updatedAt": "2021-08-11T06:02:35Z",
+		"nameWithOwner": "cca-io/rescript-material-ui",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/26762653?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxOTg1Nzk0MDg=",
+		"name": "rescript-relay",
+		"url": "https://github.com/zth/rescript-relay",
+		"description": "Use Relay with ReScript.",
+		"stargazerCount": 235,
+		"updatedAt": "2021-08-11T16:04:31Z",
+		"nameWithOwner": "zth/rescript-relay",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/1457626?u=afdf441987349e22016cbbc7be73ae303d840a00&v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxNDE4NTIxMjM=",
+		"name": "rescript-urql",
+		"url": "https://github.com/FormidableLabs/rescript-urql",
+		"description": "ReScript bindings for Formidable's Universal React Query Library, urql.",
+		"stargazerCount": 218,
+		"updatedAt": "2021-08-08T16:18:35Z",
+		"nameWithOwner": "FormidableLabs/rescript-urql",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/5078602?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkzNDgzMjY2NA==",
+		"name": "bisect_ppx",
+		"url": "https://github.com/aantron/bisect_ppx",
+		"description": "Code coverage for OCaml and ReScript",
+		"stargazerCount": 218,
+		"updatedAt": "2021-07-21T19:56:43Z",
+		"nameWithOwner": "aantron/bisect_ppx",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/12073668?u=09674d3ea5dd08898bab82493cffbdaaa7f2170b&v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyODE5NDcxODE=",
+		"name": "rescript-vscode",
+		"url": "https://github.com/rescript-lang/rescript-vscode",
+		"description": "Official VSCode plugin for ReScript",
+		"stargazerCount": 190,
+		"updatedAt": "2021-08-11T13:58:10Z",
+		"nameWithOwner": "rescript-lang/rescript-vscode",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/29257325?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyMDg5ODE2MTg=",
+		"name": "reasonml.org",
+		"url": "https://github.com/rescript-association/reasonml.org",
+		"description": "Deprecated in favor of rescript-lang.org",
+		"stargazerCount": 130,
+		"updatedAt": "2021-08-10T08:17:47Z",
+		"nameWithOwner": "rescript-association/reasonml.org",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/43032480?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxNjY1ODI1ODg=",
+		"name": "tablecloth",
+		"url": "https://github.com/darklang/tablecloth",
+		"description": "An ergonomic, cross-platform, standard library for Rescript and OCaml",
+		"stargazerCount": 469,
+		"updatedAt": "2021-08-08T16:19:13Z",
+		"nameWithOwner": "darklang/tablecloth",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/32852373?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxODk4ODQxOTk=",
+		"name": "rescript-nextjs-template",
+		"url": "https://github.com/ryyppy/rescript-nextjs-template",
+		"description": "Opinionated Boilerplate for NextJS, Tailwind and ReScript",
+		"stargazerCount": 233,
+		"updatedAt": "2021-08-10T12:39:58Z",
+		"nameWithOwner": "ryyppy/rescript-nextjs-template",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/1121889?u=3a9bba40aea1776e5e9bdebdbeda5c0e906a2505&v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyMDYyMzY3MTE=",
+		"name": "rescript-react-navigation",
+		"url": "https://github.com/rescript-react-native/rescript-react-navigation",
+		"description": "ReScript bindings for React Navigation",
+		"stargazerCount": 54,
+		"updatedAt": "2021-07-05T02:01:06Z",
+		"nameWithOwner": "rescript-react-native/rescript-react-navigation",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/54703302?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxODM2NzM3MDA=",
+		"name": "RESCRIPt",
+		"url": "https://github.com/bokulich-lab/RESCRIPt",
+		"description": "REference Sequence annotation and CuRatIon Pipeline",
+		"stargazerCount": 22,
+		"updatedAt": "2021-08-10T17:51:09Z",
+		"nameWithOwner": "bokulich-lab/RESCRIPt",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/66746566?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkzMjU1MDAzMzA=",
+		"name": "rescript-react",
+		"url": "https://github.com/rescript-lang/rescript-react",
+		"description": "Official ReScript bindings for ReactJS",
+		"stargazerCount": 216,
+		"updatedAt": "2021-08-09T10:33:29Z",
+		"nameWithOwner": "rescript-lang/rescript-react",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/29257325?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxNzk1MjI1MjI=",
+		"name": "graphql-ppx",
+		"url": "https://github.com/reasonml-community/graphql-ppx",
+		"description": "GraphQL language primitives for ReScript/ReasonML written in ReasonML",
+		"stargazerCount": 209,
+		"updatedAt": "2021-08-11T11:29:49Z",
+		"nameWithOwner": "reasonml-community/graphql-ppx",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/25113633?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyNzY0MzAyMzg=",
+		"name": "syntax",
+		"url": "https://github.com/rescript-lang/syntax",
+		"description": "ReScript's syntax as a standalone repo.",
+		"stargazerCount": 181,
+		"updatedAt": "2021-08-04T09:29:47Z",
+		"nameWithOwner": "rescript-lang/syntax",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/29257325?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyNjQ2MjU4NTE=",
+		"name": "rescript-recoil",
+		"url": "https://github.com/bloodyowl/rescript-recoil",
+		"description": "Zero-cost bindings to Facebook's Recoil library",
+		"stargazerCount": 131,
+		"updatedAt": "2021-07-19T12:51:01Z",
+		"nameWithOwner": "bloodyowl/rescript-recoil",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/1688645?u=cdbff9fe9a1a55d78a7ec38c44728228bb3c7cb0&v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyNzIyNDk1MDU=",
+		"name": "rescript-apollo-client",
+		"url": "https://github.com/jeddeloh/rescript-apollo-client",
+		"description": "ReScript bindings for the Apollo Client ecosystem",
+		"stargazerCount": 98,
+		"updatedAt": "2021-08-10T08:31:13Z",
+		"nameWithOwner": "jeddeloh/rescript-apollo-client",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/1131723?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyMzU2MTQ0NjY=",
+		"name": "styled-ppx",
+		"url": "https://github.com/davesnx/styled-ppx",
+		"description": "Typed styled components in Reason, OCaml and ReScript",
+		"stargazerCount": 279,
+		"updatedAt": "2021-08-11T22:23:07Z",
+		"nameWithOwner": "davesnx/styled-ppx",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/3763599?u=9642d3d5effd7b98774ed5b13438b411dc21a1dd&v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyNzc3MDY1Nzc=",
+		"name": "comece-aqui",
+		"url": "https://github.com/rescriptbr/comece-aqui",
+		"description": " Quer aprender ReScript? Comece aqui :rocket:",
+		"stargazerCount": 169,
+		"updatedAt": "2021-07-29T19:59:13Z",
+		"nameWithOwner": "rescriptbr/comece-aqui",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/33269458?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyODY1MTk5MDQ=",
+		"name": "rescript-project-template",
+		"url": "https://github.com/rescript-lang/rescript-project-template",
+		"description": "Clone this repo to start your own project!",
+		"stargazerCount": 60,
+		"updatedAt": "2021-07-30T22:17:31Z",
+		"nameWithOwner": "rescript-lang/rescript-project-template",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/29257325?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxMTI5MzE0NzM=",
+		"name": "rescript-classnames",
+		"url": "https://github.com/shakacode/rescript-classnames",
+		"description": "Reimplementation of classnames in ReScript",
+		"stargazerCount": 103,
+		"updatedAt": "2021-08-09T00:16:44Z",
+		"nameWithOwner": "shakacode/rescript-classnames",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/13779463?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkyODgyOTU2Njg=",
+		"name": "vim-rescript",
+		"url": "https://github.com/rescript-lang/vim-rescript",
+		"description": null,
+		"stargazerCount": 90,
+		"updatedAt": "2021-08-09T05:27:27Z",
+		"nameWithOwner": "rescript-lang/vim-rescript",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/29257325?v=4"
+		}
+	},
+	{
+		"id": "MDEwOlJlcG9zaXRvcnkxODIxMjUyNzM=",
+		"name": "rescript-react-update",
+		"url": "https://github.com/bloodyowl/rescript-react-update",
+		"description": "useReducer with updates and side effects!",
+		"stargazerCount": 87,
+		"updatedAt": "2021-08-08T22:31:23Z",
+		"nameWithOwner": "bloodyowl/rescript-react-update",
+		"owner": {
+			"avatarUrl": "https://avatars.githubusercontent.com/u/1688645?u=cdbff9fe9a1a55d78a7ec38c44728228bb3c7cb0&v=4"
+		}
+	}
+]
