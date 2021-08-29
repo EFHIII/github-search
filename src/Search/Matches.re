@@ -3,7 +3,7 @@ type match = {
   ending: int,
 };
 
-let rec recStyleMatches = (text, query) => {
+let rec recGetMatches = (text, query) => {
   /*replace spaces with &nbsp; to avoid problems*/
   let text = text |> Js.String.split(" ") |> Js.Array.joinWith({j|\xa0|j});
 
@@ -39,19 +39,12 @@ let rec recStyleMatches = (text, query) => {
         text->Js.String.slice(~from=0, ~to_=index.starting),
         text->Js.String.slice(~from=index.starting, ~to_=index.ending),
       |],
-      recStyleMatches(text->Js.String.sliceToEnd(~from=index.ending), query),
+      recGetMatches(text->Js.String.sliceToEnd(~from=index.ending), query),
     );
   };
 };
 
-/*wraps all matching text in a span with the class "match"*/
-let styleMatches = (text, query) => {
-  recStyleMatches(text, query)
-  ->Belt.Array.mapWithIndex((i, a) =>
-      if (i mod 2 == 0) {
-        React.string(a);
-      } else {
-        <span className="match"> {React.string(a)} </span>;
-      }
-    );
+let getMatches = (text, query) => {
+  recGetMatches(text, query)
+  ->Belt.Array.map(a => {<span className="match"> {React.string(a)} </span>});
 };

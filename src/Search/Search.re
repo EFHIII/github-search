@@ -2,16 +2,42 @@
  https://twisty-tanker-c10.notion.site/Code-Challenge-Autosuggest-using-ReasonReact-53f37a8abf5f4c8394d8a5df900b33a9
   */
 
-let initialResults = [||];
+let initialState = {
+  Result.results: [||],
+  Result.selected: "",
+  Result.query: "",
+};
 
-let htmlResults = (results: array(Result.result), query) => {
-  results->Belt.Array.map(data => {
-    <a href={data.url} className="repoLink" target="_blank">
-      <div key={data.id} className="container">
+let htmlResults = (setState, selected, results: array(Result.result), query) => {
+  let selected =
+    Belt.Array.some(results, data => data.id == selected) ? selected : "";
+
+  results->Belt.Array.mapWithIndex((index, data) => {
+    <a
+      id={data.id}
+      href={data.url}
+      className="repoLink"
+      target="_blank"
+      onMouseOver={_ =>
+        setState(_ =>
+          {Result.results, Result.selected: data.id, Result.query}
+        )
+      }>
+      <div
+        className={
+                    if (data.id == selected) {
+                      "container selected";
+                    } else if (selected == "" && index == 0) {
+                      "container selected";
+                    } else {
+                      "container";
+                    }
+                  }>
         <div className="containerTitle">
           <span className="repoTitle">
             <img src={data.avatarUrl} className="repoAvatar" />
-            {Matches.styleMatches(data.nameWithOwner, query)->React.array}
+            <span />
+            {Matches.getMatches(data.nameWithOwner, query)->React.array}
           </span>
           <i className="updatedDate">
             {React.string(
@@ -37,7 +63,7 @@ let htmlResults = (results: array(Result.result), query) => {
         <div className="containerContent">
           <div className="description">
             {switch (data.description) {
-             | Some(a) => Matches.styleMatches(a, query)->React.array
+             | Some(a) => Matches.getMatches(a, query)->React.array
              | None => React.string("")
              }}
           </div>
@@ -47,24 +73,26 @@ let htmlResults = (results: array(Result.result), query) => {
   });
 };
 
-let searchGitHub = (callback, event) => {
+let searchGitHub = (selected, callback, event) => {
   let query = String.lowercase_ascii(ReactEvent.Form.target(event)##value);
-  ignore(Result.getResults("repos.json", query, htmlResults, callback));
+  ignore(Result.getNResults("repos.json", query, callback, selected, 10));
 };
 
 [@react.component]
-let make = _ => {
-  let (results, setResults) = React.useState(_ => initialResults);
-
-  <div>
+let make = () => {
+  let (state, setState) = React.useState(_ => initialState);
+  <div onKeyDown={KeyEvent.keydown(setState)}>
     <input
       className="searchBar"
       type_="text"
       placeholder="Search GitHub..."
       name="name"
       autoComplete="off"
-      onChange={searchGitHub(setResults)}
+      onChange={searchGitHub(state.selected, setState)}
     />
-    <div> results->React.array </div>
+    <div id="results">
+      {htmlResults(setState, state.selected, state.results, state.query)
+       ->React.array}
+    </div>
   </div>;
 };

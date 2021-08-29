@@ -1,26 +1,46 @@
 'use strict';
 
+var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var $$String = require("bs-platform/lib/js/string.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Result$GithubSearch = require("./Result.bs.js");
 var Matches$GithubSearch = require("./Matches.bs.js");
+var KeyEvent$GithubSearch = require("./KeyEvent.bs.js");
 
-var initialResults = [];
+var initialState_results = [];
 
-function htmlResults(results, query) {
-  return Belt_Array.map(results, (function (data) {
+var initialState = {
+  results: initialState_results,
+  selected: "",
+  query: ""
+};
+
+function htmlResults(setState, selected, results, query) {
+  var selected$1 = Belt_Array.some(results, (function (data) {
+          return data.id === selected;
+        })) ? selected : "";
+  return Belt_Array.mapWithIndex(results, (function (index, data) {
                 var a = String(data.stargazerCount);
                 var number = a.split("");
                 var length = number.length;
                 var match = data.description;
                 return React.createElement("a", {
                             className: "repoLink",
+                            id: data.id,
                             href: data.url,
-                            target: "_blank"
+                            target: "_blank",
+                            onMouseOver: (function (param) {
+                                return Curry._1(setState, (function (param) {
+                                              return {
+                                                      results: results,
+                                                      selected: data.id,
+                                                      query: query
+                                                    };
+                                            }));
+                              })
                           }, React.createElement("div", {
-                                key: data.id,
-                                className: "container"
+                                className: data.id === selected$1 || selected$1 === "" && index === 0 ? "container selected" : "container"
                               }, React.createElement("div", {
                                     className: "containerTitle"
                                   }, React.createElement("span", {
@@ -28,7 +48,7 @@ function htmlResults(results, query) {
                                       }, React.createElement("img", {
                                             className: "repoAvatar",
                                             src: data.avatarUrl
-                                          }), Matches$GithubSearch.styleMatches(data.nameWithOwner, query)), React.createElement("i", {
+                                          }), React.createElement("span", undefined), Matches$GithubSearch.getMatches(data.nameWithOwner, query)), React.createElement("i", {
                                         className: "updatedDate"
                                       }, " Updated on " + data.updatedAt.toLocaleDateString()), React.createElement("span", {
                                         className: "stargazers"
@@ -40,36 +60,44 @@ function htmlResults(results, query) {
                                     className: "containerContent"
                                   }, React.createElement("div", {
                                         className: "description"
-                                      }, match !== undefined ? Matches$GithubSearch.styleMatches(match, query) : ""))));
+                                      }, match !== undefined ? Matches$GithubSearch.getMatches(match, query) : ""))));
               }));
 }
 
-function searchGitHub(callback, $$event) {
+function searchGitHub(selected, callback, $$event) {
   var query = $$String.lowercase_ascii($$event.target.value);
-  Result$GithubSearch.getResults("repos.json", query, htmlResults, callback);
+  Result$GithubSearch.getNResults("repos.json", query, callback, selected, 10);
   return /* () */0;
 }
 
 function Search(Props) {
   var match = React.useState((function () {
-          return initialResults;
+          return initialState;
         }));
-  var setResults = match[1];
-  return React.createElement("div", undefined, React.createElement("input", {
+  var setState = match[1];
+  var state = match[0];
+  var partial_arg = state.selected;
+  return React.createElement("div", {
+              onKeyDown: (function (param) {
+                  return KeyEvent$GithubSearch.keydown(setState, param);
+                })
+            }, React.createElement("input", {
                   className: "searchBar",
                   autoComplete: "off",
                   name: "name",
                   placeholder: "Search GitHub...",
                   type: "text",
                   onChange: (function (param) {
-                      return searchGitHub(setResults, param);
+                      return searchGitHub(partial_arg, setState, param);
                     })
-                }), React.createElement("div", undefined, match[0]));
+                }), React.createElement("div", {
+                  id: "results"
+                }, htmlResults(setState, state.selected, state.results, state.query)));
 }
 
 var make = Search;
 
-exports.initialResults = initialResults;
+exports.initialState = initialState;
 exports.htmlResults = htmlResults;
 exports.searchGitHub = searchGitHub;
 exports.make = make;

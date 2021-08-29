@@ -5,7 +5,7 @@ var React = require("react");
 var $$String = require("bs-platform/lib/js/string.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 
-function recStyleMatches(text, query) {
+function recGetMatches(text, query) {
   var text$1 = text.split(" ").join("\xa0");
   var index = Belt_Array.reduce(Belt_Array.reduce(query.split(" "), [], (function (a, b) {
               if (b === "") {
@@ -55,24 +55,20 @@ function recStyleMatches(text, query) {
                             return text$1.slice(param, param$1);
                           });
                       })(index.starting)(index.ending)
-              ], recStyleMatches((function (param) {
+              ], recGetMatches((function (param) {
                         return text$1.slice(param);
                       })(index.ending), query));
   }
 }
 
-function styleMatches(text, query) {
-  return Belt_Array.mapWithIndex(recStyleMatches(text, query), (function (i, a) {
-                if (i % 2 === 0) {
-                  return a;
-                } else {
-                  return React.createElement("span", {
-                              className: "match"
-                            }, a);
-                }
+function getMatches(text, query) {
+  return Belt_Array.map(recGetMatches(text, query), (function (a) {
+                return React.createElement("span", {
+                            className: "match"
+                          }, a);
               }));
 }
 
-exports.recStyleMatches = recStyleMatches;
-exports.styleMatches = styleMatches;
+exports.recGetMatches = recGetMatches;
+exports.getMatches = getMatches;
 /* react Not a pure module */

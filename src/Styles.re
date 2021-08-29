@@ -30,6 +30,19 @@ let style = {j|
     border-radius: 0px 0px 12px 12px;
   }
 
+  .selected {
+    border-style: solid;
+    border-color: skyblue;
+    position: relative;
+    left: -3px;
+    top: -3px;
+    margin-bottom: -6px;
+  }
+
+  #results:last-child{
+    margin-bottom: 12px;
+  }
+
   .searchBar {
     padding: 10px;
     font-size:17px;
@@ -50,9 +63,7 @@ let style = {j|
     color:black;
     text-decoration:none;
   }
-  .repoLink:hover .containerTitle .repoTitle {
-    text-decoration:underline;
-  }
+
   .repoLink .containerTitle {
     color:blue;
   }
@@ -66,8 +77,12 @@ let style = {j|
     font-weight: normal;
   }
 
-  .match{
-    color:red;
-    text-decoration:underline;
+  .match {
+    color: black;
+  }
+
+  .match:nth-child(2n) {
+    color: red;
+    text-decoration: underline;
   }
 |j};

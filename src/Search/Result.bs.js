@@ -47,29 +47,19 @@ function repoContainsWord(item, word) {
   }
 }
 
-function repoContainsWords(item, query) {
-  return Belt_Array.reduce(Belt_Array.map($$String.lowercase_ascii(query).split(" "), (function (word) {
-                    return repoContainsWord(item, word);
-                  })), false, (function (prim, prim$1) {
-                if (prim) {
-                  return true;
-                } else {
-                  return prim$1;
-                }
+function repoContainsWords(query, item) {
+  return Belt_Array.some($$String.lowercase_ascii(query).split(" "), (function (param) {
+                return repoContainsWord(item, param);
               }));
 }
 
-function filterResults(results, query) {
-  return Belt_Array.slice(Belt_Array.reduce(results, [], (function (a, b) {
-                    if (repoContainsWords(b, query)) {
-                      return Belt_Array.concat(a, [b]);
-                    } else {
-                      return a;
-                    }
-                  })), 0, 10);
+function filterNResultsMatchingQuery(results, query, n) {
+  return Belt_Array.slice(Belt_Array.keep(results, (function (param) {
+                    return repoContainsWords(query, param);
+                  })), 0, n);
 }
 
-function getResults(url, query, pretty, callback) {
+function getNResults(url, query, callback, selected, n) {
   return fetch(url).then((function (prim) {
                       return prim.json();
                     })).then((function (json) {
@@ -82,7 +72,11 @@ function getResults(url, query, pretty, callback) {
                   }
                 })).then((function (a) {
                 return Promise.resolve(Curry._1(callback, (function (param) {
-                                  return Curry._2(pretty, filterResults(a, query), query);
+                                  return {
+                                          results: filterNResultsMatchingQuery(a, query, n),
+                                          selected: selected,
+                                          query: query
+                                        };
                                 })));
               }));
 }
@@ -93,6 +87,6 @@ exports.$$Option = $$Option;
 exports.decodeResults = decodeResults;
 exports.repoContainsWord = repoContainsWord;
 exports.repoContainsWords = repoContainsWords;
-exports.filterResults = filterResults;
-exports.getResults = getResults;
+exports.filterNResultsMatchingQuery = filterNResultsMatchingQuery;
+exports.getNResults = getNResults;
 /* No side effect */

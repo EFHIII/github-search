@@ -10,6 +10,12 @@ type result = {
   avatarUrl: string,
 };
 
+type state = {
+  results: array(result),
+  selected: string,
+  query: string,
+};
+
 let decodeResults = json => {
   let d = Js.Json.decodeObject(json);
   {
@@ -64,21 +70,18 @@ let repoContainsWord = (item, word) => {
   };
 };
 
-let repoContainsWords = (item, query) => {
+let repoContainsWords = (query, item) => {
   Js.String.split(" ", query->String.lowercase_ascii)
-  ->Belt.Array.map(word => repoContainsWord(item, word))
-  ->Belt.Array.reduce(false, (||));
+  ->Belt.Array.some(repoContainsWord(item));
 };
 
-let filterResults = (results, query) => {
+let filterNResultsMatchingQuery = (results, query, n) => {
   results
-  ->Belt.Array.reduce([||], (a, b) =>
-      b->repoContainsWords(query) ? Belt.Array.concat(a, [|b|]) : a
-    )
-  ->Belt.Array.slice(~offset=0, ~len=10);
+  ->Belt.Array.keep(repoContainsWords(query))
+  ->Belt.Array.slice(~offset=0, ~len=n);
 };
 
-let getResults = (url, query, pretty, callback) => {
+let getNResults = (url, query, callback, selected, n) => {
   Js.Promise.(
     Fetch.fetch(url)
     |> then_(Fetch.Response.json)
@@ -90,7 +93,14 @@ let getResults = (url, query, pretty, callback) => {
          }
        )
     |> then_(a =>
-         (_ => a->filterResults(query)->pretty(query)) |> callback |> resolve
+         callback(_ =>
+           {
+             results: filterNResultsMatchingQuery(a, query, n),
+             selected,
+             query,
+           }
+         )
+         |> resolve
        )
   );
 };
