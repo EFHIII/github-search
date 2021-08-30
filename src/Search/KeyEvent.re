@@ -1,5 +1,10 @@
 [@bs.val] external document: Js.t({..}) = "document";
 
+type scollIntoViewProperties = {
+  behavior: string,
+  block: string,
+};
+
 let getResultIndex = id => {
   Js.Array.indexOf(
     document##getElementById(id),
@@ -14,7 +19,7 @@ let getResultByIndex = index => {
   } else {
     let index = (length + index) mod length;
     let result = Js.Array.from(document##getElementById("results")##children)[index];
-    result##scrollIntoView(false);
+    ignore(result##scrollIntoView({behavior: "smooth", block: "center"}));
     result##id;
   };
 };
@@ -42,7 +47,7 @@ let keydown = (setState, event) => {
       );
     })
   | "ArrowDown" =>
-    setState((state: Result.state) => {
+    setState(state => {
       let currentIndex = max(0, getResultIndex(state.selected));
       (
         {
@@ -54,7 +59,7 @@ let keydown = (setState, event) => {
       );
     })
   | "Enter" =>
-    setState((state: Result.state) => {
+    setState(state => {
       let id = state.selected == "" ? getResultByIndex(0) : state.selected;
       if (id != "") {
         document##getElementById(id)##click();

@@ -89,6 +89,14 @@ let make = () => {
       name="name"
       autoComplete="off"
       onChange={searchGitHub(state.selected, setState)}
+      //prevent scrolling to input when up/down is pressed
+      onKeyDown={event =>
+        switch (ReactEvent.Keyboard.key(event)) {
+        | key when key == "ArrowUp" || key == "ArrowDown" =>
+          ReactEvent.Keyboard.preventDefault(event)
+        | _ => ()
+        }
+      }
     />
     <div id="results">
       {htmlResults(setState, state.selected, state.results, state.query)
