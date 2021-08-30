@@ -8,6 +8,8 @@ let initialState = {
   Result.query: "",
 };
 
+let bounceDelay = 500.0; //ms
+
 let htmlResults = (setState, selected, results: array(Result.result), query) => {
   let selected =
     Belt.Array.some(results, data => data.id == selected) ? selected : "";
@@ -73,14 +75,62 @@ let htmlResults = (setState, selected, results: array(Result.result), query) => 
   });
 };
 
-let searchGitHub = (selected, callback, event) => {
+let graphQLQuery = query =>
+  {j|{
+"query": "query { search(first: 10, type: REPOSITORY, query: \\"|j}
+  ++ query
+  ++ {j|\\") { nodes { ...on Repository { id url updatedAt nameWithOwner description stargazerCount owner { avatarUrl } } } } }",
+"variables": {}
+}|j};
+
+let searchGitHub = (selected, setState, event) => {
   let query = String.lowercase_ascii(ReactEvent.Form.target(event)##value);
-  ignore(Result.getNResults("repos.json", query, callback, selected, 10));
+  ignore(
+    Result.getResults(
+      "https://api.github.com/graphql",
+      graphQLQuery(query),
+      setState,
+      selected,
+      query,
+    ),
+  );
+};
+
+let rec bounce = (setBounce, selected, setState, event) =>
+  setBounce(bounceTime =>
+    if (Js.Date.now() -. bounceTime >= bounceDelay) {
+      searchGitHub(selected, setState, event);
+      bounceTime;
+    } else {
+      ignore(
+        Js.Global.setTimeout(
+          () => bounce(setBounce, selected, setState, event),
+          int_of_float(bounceDelay),
+        ),
+      );
+      bounceTime;
+    }
+  );
+
+let debounce = (bounceTime, setBounce, selected, setState, event) => {
+  ReactEvent.Form.persist(event);
+  if (Js.Date.now() -. bounceTime > bounceDelay) {
+    searchGitHub(selected, setState, event);
+    ignore(
+      Js.Global.setTimeout(
+        () => bounce(setBounce, selected, setState, event),
+        int_of_float(bounceDelay),
+      ),
+    );
+    ();
+  };
+  setBounce(_ => Js.Date.now());
 };
 
 [@react.component]
 let make = () => {
   let (state, setState) = React.useState(_ => initialState);
+  let (bounceTime, setBounce) = React.useState(_ => 0.0);
   <div onKeyDown={KeyEvent.keydown(setState)}>
     <input
       className="searchBar"
@@ -88,7 +138,7 @@ let make = () => {
       placeholder="Search GitHub..."
       name="name"
       autoComplete="off"
-      onChange={searchGitHub(state.selected, setState)}
+      onChange={debounce(bounceTime, setBounce, state.selected, setState)}
       //prevent scrolling to input when up/down is pressed
       onKeyDown={event =>
         switch (ReactEvent.Keyboard.key(event)) {

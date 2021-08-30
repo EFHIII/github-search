@@ -5,6 +5,8 @@ type scollIntoViewProperties = {
   block: string,
 };
 
+let smoothCenterScroll = {behavior: "smooth", block: "center"};
+
 let getResultIndex = id => {
   Js.Array.indexOf(
     document##getElementById(id),
@@ -19,7 +21,7 @@ let getResultByIndex = index => {
   } else {
     let index = (length + index) mod length;
     let result = Js.Array.from(document##getElementById("results")##children)[index];
-    ignore(result##scrollIntoView({behavior: "smooth", block: "center"}));
+    ignore(result##scrollIntoView(smoothCenterScroll));
     result##id;
   };
 };

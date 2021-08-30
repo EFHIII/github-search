@@ -5,7 +5,7 @@ type match = {
 
 let rec recGetMatches = (text, query) => {
   /*replace spaces with &nbsp; to avoid problems*/
-  let text = text |> Js.String.split(" ") |> Js.Array.joinWith({j|\xa0|j});
+  let text = text; //{j|\xa0|j} &nbsp;
 
   /*get the starting & ending index of the next match*/
   let index =
