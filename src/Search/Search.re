@@ -64,10 +64,7 @@ let htmlResults = (setState, selected, results: array(Result.result), query) => 
         </div>
         <div className="containerContent">
           <div className="description">
-            {switch (data.description) {
-             | Some(a) => Matches.getMatches(a, query)->React.array
-             | None => React.string("")
-             }}
+            {data.description->Matches.getMatches(query)->React.array}
           </div>
         </div>
       </div>
@@ -87,6 +84,7 @@ let searchGitHub = (selected, setState, event) => {
   let query = String.lowercase_ascii(ReactEvent.Form.target(event)##value);
   ignore(
     Result.getResults(
+      256,
       "https://api.github.com/graphql",
       graphQLQuery(query),
       setState,
@@ -140,13 +138,6 @@ let make = () => {
       autoComplete="off"
       onChange={debounce(bounceTime, setBounce, state.selected, setState)}
       //prevent scrolling to input when up/down is pressed
-      onKeyDown={event =>
-        switch (ReactEvent.Keyboard.key(event)) {
-        | key when key == "ArrowUp" || key == "ArrowDown" =>
-          ReactEvent.Keyboard.preventDefault(event)
-        | _ => ()
-        }
-      }
     />
     <div id="results">
       {htmlResults(setState, state.selected, state.results, state.query)

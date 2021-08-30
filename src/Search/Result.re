@@ -5,7 +5,7 @@ type result = {
   url: string,
   updatedAt: Js.Date.t,
   nameWithOwner: string,
-  description: option(string),
+  description: string,
   stargazerCount: int,
   avatarUrl: string,
 };
@@ -16,7 +16,7 @@ type state = {
   query: string,
 };
 
-let decodeResults = json => {
+let decodeResults = (maxLength, json) => {
   let d = Js.Json.decodeObject(json);
   {
     id:
@@ -41,9 +41,16 @@ let decodeResults = json => {
       ->Option.flatMap(Js.Json.decodeString)
       ->Option.getExn,
     description:
-      d
-      ->Option.flatMap(d => Js.Dict.get(d, "description"))
-      ->Option.flatMap(Js.Json.decodeString),
+      switch (
+        d
+        ->Option.flatMap(d => Js.Dict.get(d, "description"))
+        ->Option.flatMap(Js.Json.decodeString)
+      ) {
+      | Some(desc) when String.length(desc) > maxLength =>
+        String.sub(desc, 0, maxLength) ++ "..."
+      | Some(desc) => desc
+      | None => ""
+      },
     stargazerCount:
       d
       ->Option.flatMap(d => Js.Dict.get(d, "stargazerCount"))
@@ -60,7 +67,7 @@ let decodeResults = json => {
   };
 };
 
-let getResults = (url, requestString, setState, selected, query) => {
+let getResults = (maxLength, url, requestString, setState, selected, query) => {
   Js.Promise.(
     Fetch.fetchWithInit(
       url,
@@ -94,7 +101,7 @@ let getResults = (url, requestString, setState, selected, query) => {
        )
     |> then_(json => {
          switch (json) {
-         | Some(a) => a |> Js.Array.map(decodeResults) |> resolve
+         | Some(a) => a |> Js.Array.map(decodeResults(maxLength)) |> resolve
          | None => [||] |> resolve
          }
        })

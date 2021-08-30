@@ -37,6 +37,7 @@ let keydown = (setState, event) => {
     */
   switch (ReactEvent.Keyboard.key(event)) {
   | "ArrowUp" =>
+    ReactEvent.Keyboard.preventDefault(event);
     setState((state: Result.state) => {
       let currentIndex = max(0, getResultIndex(state.selected));
       (
@@ -47,8 +48,9 @@ let keydown = (setState, event) => {
           query: state.query,
         }: Result.state
       );
-    })
+    });
   | "ArrowDown" =>
+    ReactEvent.Keyboard.preventDefault(event);
     setState(state => {
       let currentIndex = max(0, getResultIndex(state.selected));
       (
@@ -59,7 +61,7 @@ let keydown = (setState, event) => {
           query: state.query,
         }: Result.state
       );
-    })
+    });
   | "Enter" =>
     setState(state => {
       let id = state.selected == "" ? getResultByIndex(0) : state.selected;
