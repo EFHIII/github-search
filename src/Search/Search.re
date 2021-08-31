@@ -9,6 +9,7 @@ let initialState = {
 };
 
 let bounceDelay = 500.0; //ms
+let maxDescriptionLength = 256;
 
 let htmlResults = (setState, selected, results: array(Result.result), query) => {
   let selected =
@@ -37,13 +38,16 @@ let htmlResults = (setState, selected, results: array(Result.result), query) => 
                   }>
         <div className="containerTitle">
           <span className="repoTitle">
-            <img src={data.avatarUrl} className="repoAvatar" />
+            <img src={data.owner.avatarUrl} className="repoAvatar" />
             <span />
             {Matches.getMatches(data.nameWithOwner, query)->React.array}
           </span>
           <i className="updatedDate">
             {React.string(
-               " Updated on " ++ Js.Date.toLocaleDateString(data.updatedAt),
+               " Updated on "
+               ++ Js.Date.toLocaleDateString(
+                    Js.Date.fromString(data.updatedAt),
+                  ),
              )}
           </i>
           <span className="stargazers">
@@ -64,7 +68,18 @@ let htmlResults = (setState, selected, results: array(Result.result), query) => 
         </div>
         <div className="containerContent">
           <div className="description">
-            {data.description->Matches.getMatches(query)->React.array}
+            {switch (data.description) {
+             | Some(description)
+                 when String.length(description) > maxDescriptionLength =>
+               description
+               ->String.sub(0, maxDescriptionLength)
+               ->Matches.getMatches(query)
+               ->Belt.Array.concat([|React.string("...")|])
+               ->React.array
+             | Some(description) =>
+               description->Matches.getMatches(query)->React.array
+             | None => <i> {React.string("No description...")} </i>
+             }}
           </div>
         </div>
       </div>
@@ -84,7 +99,6 @@ let searchGitHub = (selected, setState, event) => {
   let query = String.lowercase_ascii(ReactEvent.Form.target(event)##value);
   ignore(
     Result.getResults(
-      256,
       "https://api.github.com/graphql",
       graphQLQuery(query),
       setState,
